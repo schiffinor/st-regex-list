@@ -1,0 +1,8 @@
+{
+  "display_name": "Regex Lister",
+  "author": "Roman Schiffino",
+  "version": "0.1.0",
+  "js": "index.js",
+  "license": "AGPL-3.0-or-later",
+  "description": "Adds /regex-list slash command that returns the names of all active regex scripts."
+}
