@@ -3,9 +3,9 @@
  *  *currently-active* Regex script (global + scoped, excluding disabled).
  *  ──────────────────────────────────────────────────────────────────────── */
 
-import { extension_settings } from '../../extensions.js';
-import { SlashCommandParser } from '../../../slash-commands/SlashCommandParser.js';
+import { extension_settings } from '../../../extensions.js';
 import { SlashCommand } from '../../../slash-commands/SlashCommand.js';
+import { SlashCommandParser } from '../../../slash-commands/SlashCommandParser.js';
 import { ARGUMENT_TYPE, SlashCommandArgument, SlashCommandNamedArgument } from '../../../slash-commands/SlashCommandArgument.js';
 
 /* ---------- helpers ---------------------------------------------------- */
@@ -28,34 +28,34 @@ function getActiveRegexScripts() {
 
 /* ---------- slash-command registration -------------------------------- */
 
-jQuery(function () {
 
-    SlashCommandParser.addCommandObject(SlashCommand.fromProps({
-        name:     'regex-list',
-        aliases:  ['regexes', 'rl'],
-        helpString: 'Return the names of all active regex scripts.',
-        returns:  'comma-separated list',
 
-        callback: (args /*named*/, _value /*unnamed*/) => {
-            const sep = typeof args.sep === 'string' && args.sep.length
-                ? args.sep : ', ';
-            return getActiveRegexScripts().join(sep);
-        },
+SlashCommandParser.addCommandObject(SlashCommand.fromProps({
+    name:     'regex-list',
+    aliases:  ['regexes', 'rl'],
+    helpString: 'Return the names of all active regex scripts.',
+    returns:  'comma-separated list',
 
-        /* named args */
-        namedArgumentList: [
-            SlashCommandNamedArgument.fromProps({
-                name:         'sep',
-                description:  'Separator string (default: ", ")',
-                isRequired:   false,
-                typeList:     [ARGUMENT_TYPE.STRING],
-                defaultValue: ', ',
-            }),
-        ],
+    callback: (args /*named*/, _value /*unnamed*/) => {
+        const sep = typeof args.sep === 'string' && args.sep.length
+            ? args.sep : ', ';
+        return getActiveRegexScripts().join(sep);
+    },
 
-        /* this command takes no unnamed args */
-        unnamedArgumentList: [],
-    }));
+    /* named args */
+    namedArgumentList: [
+        SlashCommandNamedArgument.fromProps({
+            name:         'sep',
+            description:  'Separator string (default: ", ")',
+            isRequired:   false,
+            typeList:     [ARGUMENT_TYPE.STRING],
+            defaultValue: ', ',
+        }),
+    ],
 
-    console.log('[Regex-Lister] Slash command /regex-list registered');
-});
+    /* this command takes no unnamed args */
+    unnamedArgumentList: [],
+}));
+
+console.log('[Regex-Lister] Slash command /regex-list registered');
+
